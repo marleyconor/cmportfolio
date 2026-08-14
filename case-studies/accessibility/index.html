@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessibility in an education product · Conor Marley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #FCFAF7;
+    --bg-card: #F4F4F5;
+    --bg-card-2: #ECECEE;
+    --text: #292929;
+    --text-secondary: #5D5D5D;
+    --text-tertiary: #9E9E9E;
+    --accent: #292929;
+    --accent-hover: #000000;
+    --border: rgba(0, 0, 0, 0.07);
+    --border-strong: rgba(0, 0, 0, 0.12);
+    --stroke: #E6E6E6;
+    --black: #292929;
+    --white: #FFFFFF;
+    --font: -apple-system, "SF Pro Text", "SF Pro Display", BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: "SF Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.15px;
+  }
+
+  ::selection { background: var(--accent); color: var(--white); }
+  a { color: inherit; text-decoration: none; }
+  strong { font-weight: 500; }
+  img { max-width: 100%; display: block; }
+
+  /* NAV: matches index.html */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(252, 250, 247, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .nav__inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 22px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .nav__logo {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.15px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+  .nav__ctas { display: flex; align-items: center; gap: 30px; justify-self: end; }
+  .nav__ctas .pill { font-size: 14px; padding: 11px 24px; }
+  .nav__link {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.15px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+  }
+  .nav__link:hover { color: var(--text); }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    line-height: 1;
+    letter-spacing: -0.15px;
+    text-decoration: none;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pill:focus { outline: none; }
+  .pill:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .pill--outline { background: transparent; color: var(--text); border: 1px solid var(--border-strong); }
+  .pill--outline:hover { background: var(--bg-card); }
+  .pill--dark { background: var(--black); color: var(--bg); }
+  .pill--dark:hover { background: #222; }
+  .pill--lg { padding: 12px 24px; font-size: 14px; }
+
+  /* SHELL */
+  main {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 64px 32px 80px;
+  }
+
+  /* HERO */
+  .case-eyebrow {
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    letter-spacing: -0.15px;
+    margin-bottom: 20px;
+  }
+  .case-title {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.15px;
+    line-height: 1.08;
+    max-width: 880px;
+    margin-bottom: 22px;
+  }
+  .case-dek {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.45;
+    max-width: 720px;
+    margin-bottom: 40px;
+  }
+
+  /* META STRIP */
+  .meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 72px;
+  }
+  .meta__cell {
+    background: transparent;
+    border: 1px solid var(--stroke);
+    border-radius: 16px;
+    padding: 18px 20px;
+  }
+  .meta__label {
+    font-family: var(--font);
+    font-size: 12px;
+    letter-spacing: -0.15px;
+    color: var(--text-tertiary);
+    margin-bottom: 6px;
+  }
+  .meta__value {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.15px;
+  }
+
+  /* SECTION */
+  .sec { margin-bottom: 80px; }
+  .sec__eyebrow {
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: -0.15px;
+    margin-bottom: 12px;
+  }
+  .sec__heading {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.15px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    max-width: 720px;
+  }
+  .sec__body {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    max-width: 680px;
+    margin-bottom: 28px;
+  }
+  .sec__body strong { color: var(--text); font-weight: 500; }
+
+  /* FIGURE */
+  .figure {
+    background: transparent;
+    padding: 0;
+  }
+  .figure img {
+    border-radius: 10px;
+    width: 100%;
+    height: 420px;
+    object-fit: contain;
+    display: block;
+  }
+  @media (max-width: 768px) {
+    .figure img { height: 260px; }
+  }
+  .figure__caption {
+    font-family: var(--font);
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 12px;
+    line-height: 1.4;
+  }
+
+  /* BEFORE / AFTER SIDE-BY-SIDE */
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  /* PULLQUOTE */
+  .pullquote {
+    background: transparent;
+    border: 1px solid var(--stroke);
+    border-radius: 16px;
+    padding: 36px 40px;
+    margin: 24px 0;
+  }
+  .pullquote__text {
+    font-size: 24px;
+    line-height: 1.35;
+    letter-spacing: -0.15px;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .pullquote__source {
+    font-family: var(--font);
+    font-size: 12px;
+    color: var(--text-tertiary);
+    letter-spacing: -0.15px;
+  }
+
+  /* RESULTS — hero result anchor */
+  .hero-result {
+    background: transparent;
+    border: 1px solid var(--stroke);
+    border-radius: 16px;
+    padding: 56px 48px;
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .hero-result__value {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.15px;
+    line-height: 0.88;
+    margin-bottom: 14px;
+    color: var(--text);
+  }
+  .hero-result__label {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.15px;
+    line-height: 1.2;
+    color: var(--text);
+  }
+  .hero-result__context {
+    font-family: var(--font);
+    font-size: 13px;
+    color: var(--text-tertiary);
+    letter-spacing: -0.15px;
+    margin-top: 4px;
+  }
+  @media (max-width: 768px) {
+    .hero-result { padding: 36px 24px; }
+  }
+
+  /* CTA */
+  .end-cta {
+    text-align: center;
+    padding: 160px 0 64px;
+    border-top: 1px solid var(--border);
+  }
+  .end-cta__title {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.15px;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .end-cta__row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .contact-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .contact-action { gap: 10px; justify-content: center; }
+  .contact-action__icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity 0.15s ease;
+  }
+  .contact-action:hover .contact-action__icon { opacity: 1; }
+  .contact-action.is-copied .contact-action__icon { display: none; }
+
+  .end-cta__back {
+    display: inline-block;
+    margin-top: 100px;
+    font-size: 15px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-strong);
+    padding-bottom: 1px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .end-cta__back:hover {
+    color: var(--text);
+    border-bottom-color: var(--text);
+  }
+
+  /* FOOTER */
+  .footer {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 64px 32px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer__copy { font-size: 13px; color: var(--text-tertiary); }
+  .footer__links { display: flex; gap: 24px; }
+  .footer__link { font-size: 13px; color: var(--text-secondary); transition: color 0.15s ease; }
+  .footer__link:hover { color: var(--text); }
+
+  @media (max-width: 768px) {
+    .nav__inner { grid-template-columns: 1fr auto; padding: 14px 20px; }
+    .nav__logo { font-size: 16px; }
+    .nav__ctas { gap: 18px; }
+    .nav__ctas .pill { font-size: 14px; padding: 8px 18px; }
+    main { padding: 32px 20px 48px; }
+    .meta { grid-template-columns: repeat(2, 1fr); margin-bottom: 48px; }
+    .sec { margin-bottom: 56px; }
+    .sec__body { font-size: 14px; }
+    .pair { grid-template-columns: 1fr; }
+    .results { grid-template-columns: 1fr; }
+    .pullquote { padding: 24px 22px; }
+    .pullquote__text { font-size: 14px; }
+    .end-cta { padding: 100px 0 40px; }
+    .end-cta__back { margin-top: 60px; }
+    .end-cta__row { flex-direction: column; align-items: stretch; }
+    .contact-actions { flex-direction: column; align-items: stretch; gap: 10px; }
+    .contact-action { width: 100%; justify-content: center; }
+    .footer { padding: 24px 20px 40px; flex-direction: column; gap: 16px; }
+  }
+  @media (min-width: 1024px) {
+    body { font-size: 15px; }
+    .nav__logo { font-size: 17px; }
+    .case-title, .sec__heading, .end-cta__title, .pullquote__text, .hero-result__value { font-size: 29px; }
+    .case-dek, .sec__body, .hero-result__label, .meta__value { font-size: 15px; }
+    .case-eyebrow, .sec__eyebrow, .meta__label { font-size: 13px; }
+    .footer__copy, .footer__link { font-size: 14px; }
+  }
+
+  /* ============================================
+     LIGHTBOX (click a figure image to full-screen)
+     ============================================ */
+  .figure img.is-zoomable { cursor: zoom-in; }
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    background: rgba(20, 20, 22, 0.92);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    cursor: zoom-out;
+  }
+  .lightbox.is-open { opacity: 1; visibility: visible; }
+  .lightbox__img {
+    max-width: 94vw;
+    max-height: 92vh;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.6);
+    transform: scale(0.985);
+    transition: transform 0.2s ease;
+  }
+  .lightbox.is-open .lightbox__img { transform: scale(1); }
+  .lightbox__close {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease;
+  }
+  .lightbox__close:hover { background: rgba(255, 255, 255, 0.22); }
+  @media (max-width: 768px) {
+    .lightbox { padding: 16px; }
+    .lightbox__close { top: 12px; right: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="/">
+      <span>Conor Marley</span>
+    </a>
+    <div class="nav__ctas">
+      <a class="nav__link" href="/#work">Work</a>
+      <a class="nav__link" href="/about/">About</a>
+      <a class="nav__link" href="/conor-marley-resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <h1 class="case-title">Making an education platform fully accessible.</h1>
+  <p class="case-dek">
+    Accessibility isn't a feature you bolt on at the end; it's the baseline for whether a product is usable at all. I led the work to bring CourseNetworking, an education platform used by students across a wide range of abilities, into conformance with WCAG 2.0, then published it so clients could trust it.
+  </p>
+
+  <div class="meta">
+    <div class="meta__cell">
+      <div class="meta__label">Role</div>
+      <div class="meta__value">Lead Product Designer</div>
+    </div>
+    <div class="meta__cell">
+      <div class="meta__label">Team</div>
+      <div class="meta__value">1 designer, 2 engineers</div>
+    </div>
+    <div class="meta__cell">
+      <div class="meta__label">Tools</div>
+      <div class="meta__value">Figma, Jira</div>
+    </div>
+    <div class="meta__cell">
+      <div class="meta__label">Timeline</div>
+      <div class="meta__value">Sep 2021 – ongoing</div>
+    </div>
+  </div>
+
+  <!-- CONTEXT -->
+  <section class="sec">
+    <div class="sec__eyebrow">Context</div>
+    <h2 class="sec__heading">Inclusive by default, not exception.</h2>
+    <p class="sec__body">
+      Creating products that everyone can use is a core part of being a good designer, and it's an ethical line: no one should be excluded because of a disability. I audited the existing product against the Web Content Accessibility Guidelines (WCAG), designed the missing pieces, and paired with two engineers to ship them. Meeting the guidelines didn't just include the users we were excluding; it made the whole product easier to navigate for everyone.
+    </p>
+  </section>
+
+  <!-- 1.1.1 ALT TEXT -->
+  <section class="sec">
+    <div class="sec__eyebrow">Alt text</div>
+    <h2 class="sec__heading">Non-text content: user-authored alt text.</h2>
+    <p class="sec__body">
+      A screen reader can't perceive an image unless someone describes it. I designed an interface that lets users add their own alt text the moment they upload an image, right inside the existing upload flow. Making it fast and obvious to write a description meaningfully improved usability for screen reader users and laid the groundwork for the accessibility features that followed.
+    </p>
+    <div class="figure">
+      <img src="img-01.png?v=3" alt="An upload dialog with an 'Add Alt text' panel where the user writes a concise description of an uploaded photo.">
+    </div>
+  </section>
+
+  <!-- 1.2.2 CAPTIONS -->
+  <section class="sec">
+    <div class="sec__eyebrow">Captions</div>
+    <h2 class="sec__heading">Captions: WebVTT in the video player.</h2>
+    <p class="sec__body">
+      For video, we adopted WebVTT, the common web caption format, and built caption upload directly into our player. I modeled the flow on the alt-text interface we'd already researched and tested, so adding captions felt familiar rather than like a separate, technical task.
+    </p>
+    <div class="figure">
+      <img src="img-02.png?v=3" alt="A video upload with an 'Add Closed Captions' dialog accepting a WebVTT file, modeled on the alt-text flow.">
+    </div>
+  </section>
+
+  <!-- 2.1.1 KEYBOARD -->
+  <section class="sec">
+    <div class="sec__eyebrow">Keyboard</div>
+    <h2 class="sec__heading">Keyboard: fully operable without a mouse.</h2>
+    <p class="sec__body">
+      Not everyone uses a mouse. Every interface I design has to be fully operable from the keyboard, with no reliance on timing or gesture. I worked through each surface to guarantee a logical focus order and reachable controls, so the entire product can be navigated by keyboard alone.
+    </p>
+    <div class="figure">
+      <img src="img-03.gif" alt="A post composer being navigated entirely by keyboard, with focus moving in a logical order through each control.">
+    </div>
+  </section>
+
+  <!-- 1.4.3 CONTRAST -->
+  <section class="sec">
+    <div class="sec__eyebrow">Contrast</div>
+    <h2 class="sec__heading">Contrast: a palette you can actually see.</h2>
+    <p class="sec__body">
+      You can't use what you can't see. I built the design system's color scheme around contrast ratios that clear the WCAG AA threshold, then audited key surfaces like global search to confirm every text and control pair passed. The result is a palette that's compliant and simply more legible.
+    </p>
+    <div class="figure">
+      <img src="img-04.png?v=3" alt="The CourseNetworking search bar annotated with measured contrast ratios, each well above the WCAG AA minimum.">
+    </div>
+  </section>
+
+  <!-- 3.3.3 ERROR SUGGESTION -->
+  <section class="sec">
+    <div class="sec__eyebrow">Errors</div>
+    <h2 class="sec__heading">Error suggestion: tell people how to fix it.</h2>
+    <p class="sec__body">
+      A good error message doesn't just say something went wrong; it says how to fix it. Errors are frustrating, sometimes upsetting, so I rewrote our form validation to name the specific problem and the exact correction, turning a dead end into a clear next step.
+    </p>
+    <div class="figure">
+      <img src="img-05.png?v=3" alt="Two date-field errors side by side. Before: 'Please enter a valid date.' After: 'Start Date is invalid. Please use MM/DD/YYYY format.'">
+    </div>
+  </section>
+
+  <!-- GENDER FIELD — hidden for now (remove the `hidden` attribute to restore) -->
+  <section class="sec" hidden>
+    <div class="sec__eyebrow">Forms</div>
+    <h2 class="sec__heading">Gender field: expression without a weapon.</h2>
+    <p class="sec__body">
+      Originally we let users type a custom gender to allow for free self-expression, but a handful abused the open field to demean others. I replaced it with a curated dropdown that still offers a wide range of identities, expanded over time from user feedback, preserving expression while removing the vector for hateful conduct.
+    </p>
+    <div class="figure">
+      <img src="img-06.png?v=3" alt="Before and after of the gender field: an open 'Let Me Specify' text input replaced with a curated dropdown of many identity options.">
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="sec">
+
+    <div class="sec__eyebrow">Result</div>
+    <div class="hero-result">
+      <div class="hero-result__value">VPAT</div>
+      <div class="hero-result__label">Published WCAG 2.0 conformance, documented for clients.</div>
+      <div class="hero-result__context">The compliance documentation unlocked multiple new client contracts that required it.</div>
+    </div>
+
+    <p class="sec__body">
+      Beyond fixing specific issues, the work shipped new capabilities, user-authored alt text, captions, clearer errors, that made the product better for everyone, not only users with disabilities. We documented our conformance in a Voluntary Product Accessibility Template (VPAT), which several prospective clients required before signing.
+    </p>
+  </section>
+
+  <!-- TAKEAWAYS -->
+  <section class="sec">
+    <div class="sec__eyebrow">Learnings</div>
+    <h2 class="sec__heading">What the work taught me.</h2>
+    <p class="sec__body">
+      <strong>Accessibility is design quality, not a checklist.</strong> Almost every fix, higher contrast, clearer errors, sane keyboard order, made the product better for every user, not just the ones it was strictly required for.
+    </p>
+    <p class="sec__body">
+      <strong>Model new patterns on tested ones.</strong> Reusing the alt-text flow for captions meant users learned one interaction, not two, and the second feature shipped faster.
+    </p>
+    <p class="sec__body">
+      <strong>Structure can protect people.</strong> The gender field taught me that maximum freedom isn't always the inclusive choice; sometimes thoughtful constraint is what keeps a space safe.
+    </p>
+  </section>
+
+  <!-- END CTA -->
+  <section class="end-cta" id="contact">
+    <h2 class="end-cta__title">Want to ship like this on your team?</h2>
+    <div class="contact-actions">
+      <button type="button" class="pill pill--outline pill--lg contact-action" data-copy-email="conor@conormarley.com" aria-label="Copy email to clipboard">
+        <span class="contact-action__label">conor@conormarley.com</span>
+        <svg class="contact-action__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="5" y="5" width="9" height="9" rx="1.5"></rect>
+          <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"></path>
+        </svg>
+      </button>
+      <a class="pill pill--outline pill--lg contact-action" href="https://www.linkedin.com/in/conormarley/" target="_blank" rel="noopener">
+        <span class="contact-action__label">LinkedIn</span>
+        <svg class="contact-action__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 3.5h6.5V10"></path>
+          <path d="M12.5 3.5L4 12"></path>
+        </svg>
+      </a>
+    </div>
+    <a class="end-cta__back" href="/#work">← More case studies</a>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__copy">© 2026 Conor Marley</div>
+  <div class="footer__links">
+    <a class="footer__link" href="#">LinkedIn</a>
+    <a class="footer__link" href="#">Twitter</a>
+    <a class="footer__link" href="mailto:conor@conormarley.com">Email</a>
+  </div>
+</footer>
+
+<script>
+  (function setupEmailCopy() {
+    const lockWidths = () => document.querySelectorAll('[data-copy-email]').forEach(btn => {
+      btn.style.minWidth = Math.ceil(btn.getBoundingClientRect().width) + 'px';
+    });
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(lockWidths); } else { lockWidths(); }
+    document.querySelectorAll('[data-copy-email]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const email = btn.getAttribute('data-copy-email');
+        const labelEl = btn.querySelector('.contact-action__label') || btn;
+        try {
+          await navigator.clipboard.writeText(email);
+        } catch (_) {
+          const range = document.createRange();
+          range.selectNodeContents(labelEl);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          try { document.execCommand('copy'); } catch (__) {}
+          sel.removeAllRanges();
+        }
+        if (btn._copyTimer) return;
+        const original = labelEl.textContent;
+        labelEl.textContent = 'Copied!';
+        btn.classList.add('is-copied');
+        btn._copyTimer = setTimeout(() => {
+          labelEl.textContent = original;
+          btn.classList.remove('is-copied');
+          btn._copyTimer = null;
+        }, 1800);
+      });
+    });
+  })();
+</script>
+
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
+  <button class="lightbox__close" type="button" aria-label="Close image viewer">&times;</button>
+  <img class="lightbox__img" src="" alt="">
+</div>
+
+<script>
+  (function setupLightbox() {
+    var lb = document.getElementById('lightbox');
+    if (!lb) return;
+    var lbImg = lb.querySelector('.lightbox__img');
+    var closeBtn = lb.querySelector('.lightbox__close');
+    var lastFocus = null;
+
+    function open(img) {
+      lastFocus = document.activeElement;
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = img.alt || '';
+      lb.hidden = false;
+      // force reflow so the transition runs
+      void lb.offsetWidth;
+      lb.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+    function close() {
+      lb.classList.remove('is-open');
+      document.body.style.overflow = '';
+      var done = function () {
+        lb.hidden = true;
+        lbImg.src = '';
+        lb.removeEventListener('transitionend', done);
+      };
+      lb.addEventListener('transitionend', done);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    document.querySelectorAll('.figure img').forEach(function (img) {
+      if (/placeholder/i.test(img.getAttribute('src') || '')) return;
+      img.classList.add('is-zoomable');
+      img.addEventListener('click', function () { open(img); });
+    });
+
+    lb.addEventListener('click', function () { close(); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && lb.classList.contains('is-open')) close();
+    });
+  })();
+</script>
+</body>
+</html>

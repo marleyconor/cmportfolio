@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing &amp; Packaging · Conor Marley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #FCFAF7;
+    --bg-card: #F4F4F5;
+    --bg-card-2: #ECECEE;
+    --text: #292929;
+    --text-secondary: #5D5D5D;
+    --text-tertiary: #9E9E9E;
+    --accent: #292929;
+    --accent-hover: #000000;
+    --border: rgba(0, 0, 0, 0.07);
+    --border-strong: rgba(0, 0, 0, 0.12);
+    --stroke: #E6E6E6;
+    --black: #292929;
+    --white: #FFFFFF;
+    --font: -apple-system, "SF Pro Text", "SF Pro Display", BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: "SF Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.15px;
+  }
+
+  ::selection { background: var(--accent); color: var(--white); }
+  a { color: inherit; text-decoration: none; }
+  strong { font-weight: 500; }
+  img { max-width: 100%; display: block; }
+
+  /* NAV: matches index.html */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(252, 250, 247, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .nav__inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 22px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .nav__logo {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.15px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+  .nav__ctas { display: flex; align-items: center; gap: 30px; justify-self: end; }
+  .nav__ctas .pill { font-size: 14px; padding: 11px 24px; }
+  .nav__link {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.15px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+  }
+  .nav__link:hover { color: var(--text); }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    line-height: 1;
+    letter-spacing: -0.15px;
+    text-decoration: none;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pill:focus { outline: none; }
+  .pill:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .pill--outline { background: transparent; color: var(--text); border: 1px solid var(--border-strong); }
+  .pill--outline:hover { background: var(--bg-card); }
+  .pill--dark { background: var(--black); color: var(--bg); }
+  .pill--dark:hover { background: #222; }
+  .pill--lg { padding: 12px 24px; font-size: 14px; }
+
+  /* SHELL */
+  main {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 64px 32px 80px;
+  }
+
+  /* HERO */
+  .case-eyebrow {
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    letter-spacing: -0.15px;
+    margin-bottom: 20px;
+  }
+  .case-title {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.15px;
+    line-height: 1.08;
+    max-width: 880px;
+    margin-bottom: 22px;
+  }
+  .case-dek {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.45;
+    max-width: 720px;
+    margin-bottom: 40px;
+  }
+
+  /* META STRIP */
+  .meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 72px;
+  }
+  .meta__cell {
+    background: transparent;
+    border: 1px solid var(--stroke);
+    border-radius: 16px;
+    padding: 18px 20px;
+  }
+  .meta__label {
+    font-family: var(--font);
+    font-size: 12px;
+    letter-spacing: -0.15px;
+    color: var(--text-tertiary);
+    margin-bottom: 6px;
+  }
+  .meta__value {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.15px;
+  }
+
+  /* SECTION */
+  .sec { margin-bottom: 80px; }
+  .sec__eyebrow {
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: -0.15px;
+    margin-bottom: 12px;
+  }
+  .sec__heading {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.15px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    max-width: 720px;
+  }
+  .sec__body {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    max-width: 680px;
+    margin-bottom: 28px;
+  }
+  .sec__body strong { color: var(--text); font-weight: 500; }
+
+  /* FIGURE */
+  .figure {
+    background: transparent;
+    padding: 0;
+  }
+  main > .figure { margin-bottom: 80px; }
+  .figure img {
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  @media (max-width: 768px) {
+  }
+  .figure__caption {
+    font-family: var(--font);
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 12px;
+    line-height: 1.4;
+  }
+
+  /* BEFORE / AFTER SIDE-BY-SIDE */
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  /* PULLQUOTE */
+  .pullquote {
+    background: transparent;
+    border: 1px solid var(--stroke);
+    border-radius: 16px;
+    padding: 36px 40px;
+    margin: 24px 0;
+  }
+  .pullquote__text {
+    font-size: 24px;
+    line-height: 1.35;
+    letter-spacing: -0.15px;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .pullquote__source {
+    font-family: var(--font);
+    font-size: 12px;
+    color: var(--text-tertiary);
+    letter-spacing: -0.15px;
+  }
+
+  /* RESULTS — hero result anchor */
+  .hero-result {
+    background: transparent;
+    border: 1px solid var(--stroke);
+    border-radius: 16px;
+    padding: 56px 48px;
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .hero-result__value {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.15px;
+    line-height: 0.88;
+    margin-bottom: 14px;
+    color: var(--text);
+  }
+  .hero-result__label {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.15px;
+    line-height: 1.2;
+    color: var(--text);
+  }
+  .hero-result__context {
+    font-family: var(--font);
+    font-size: 13px;
+    color: var(--text-tertiary);
+    letter-spacing: -0.15px;
+    margin-top: 4px;
+  }
+  @media (max-width: 768px) {
+    .hero-result { padding: 36px 24px; }
+  }
+
+  /* CTA */
+  .end-cta {
+    text-align: center;
+    padding: 160px 0 64px;
+    border-top: 1px solid var(--border);
+  }
+  .end-cta__title {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.15px;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .end-cta__row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .contact-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .contact-action { gap: 10px; justify-content: center; }
+  .contact-action__icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity 0.15s ease;
+  }
+  .contact-action:hover .contact-action__icon { opacity: 1; }
+  .contact-action.is-copied .contact-action__icon { display: none; }
+
+  .end-cta__back {
+    display: inline-block;
+    margin-top: 100px;
+    font-size: 15px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-strong);
+    padding-bottom: 1px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .end-cta__back:hover {
+    color: var(--text);
+    border-bottom-color: var(--text);
+  }
+
+  /* FOOTER */
+  .footer {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 64px 32px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer__copy { font-size: 13px; color: var(--text-tertiary); }
+  .footer__links { display: flex; gap: 24px; }
+  .footer__link { font-size: 13px; color: var(--text-secondary); transition: color 0.15s ease; }
+  .footer__link:hover { color: var(--text); }
+
+  @media (max-width: 768px) {
+    .nav__inner { grid-template-columns: 1fr auto; padding: 14px 20px; }
+    .nav__logo { font-size: 16px; }
+    .nav__ctas { gap: 18px; }
+    .nav__ctas .pill { font-size: 14px; padding: 8px 18px; }
+    main { padding: 32px 20px 48px; }
+    .meta { grid-template-columns: repeat(2, 1fr); margin-bottom: 48px; }
+    .sec { margin-bottom: 56px; }
+    .sec__body { font-size: 14px; }
+    .pair { grid-template-columns: 1fr; }
+    .results { grid-template-columns: 1fr; }
+    .pullquote { padding: 24px 22px; }
+    .pullquote__text { font-size: 14px; }
+    .end-cta { padding: 100px 0 40px; }
+    .end-cta__back { margin-top: 60px; }
+    .end-cta__row { flex-direction: column; align-items: stretch; }
+    .contact-actions { flex-direction: column; align-items: stretch; gap: 10px; }
+    .contact-action { width: 100%; justify-content: center; }
+    .footer { padding: 24px 20px 40px; flex-direction: column; gap: 16px; }
+  }
+  @media (min-width: 1024px) {
+    body { font-size: 15px; }
+    .nav__logo { font-size: 17px; }
+    .case-title, .sec__heading, .end-cta__title, .pullquote__text, .hero-result__value { font-size: 29px; }
+    .case-dek, .sec__body, .hero-result__label, .meta__value { font-size: 15px; }
+    .case-eyebrow, .sec__eyebrow, .meta__label { font-size: 13px; }
+    .footer__copy, .footer__link { font-size: 14px; }
+  }
+
+  /* ============================================
+     LIGHTBOX (click a figure image to full-screen)
+     ============================================ */
+  .figure img.is-zoomable { cursor: zoom-in; }
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    background: rgba(20, 20, 22, 0.92);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    cursor: zoom-out;
+  }
+  .lightbox.is-open { opacity: 1; visibility: visible; }
+  .lightbox__img {
+    max-width: 94vw;
+    max-height: 92vh;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.6);
+    transform: scale(0.985);
+    transition: transform 0.2s ease;
+  }
+  .lightbox.is-open .lightbox__img { transform: scale(1); }
+  .lightbox__close {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease;
+  }
+  .lightbox__close:hover { background: rgba(255, 255, 255, 0.22); }
+  @media (max-width: 768px) {
+    .lightbox { padding: 16px; }
+    .lightbox__close { top: 12px; right: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="/">
+      <span>Conor Marley</span>
+    </a>
+    <div class="nav__ctas">
+      <a class="nav__link" href="/#work">Work</a>
+      <a class="nav__link" href="/about/">About</a>
+      <a class="nav__link" href="/conor-marley-resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HOOK -->
+  <h1 class="case-title">NFHS Pricing &amp; Packaging Redesign</h1>
+  <p class="case-dek">
+    I redesigned a one-size-fits-all subscription into a tiered system that contributed to $44M in incremental bookings. NFHS Network streams high school sports to more than a million subscribers. I led the new pricing experience from early validation through design, front-end implementation, and launch.
+  </p>
+
+  <div class="meta">
+    <div class="meta__cell">
+      <div class="meta__label">Role</div>
+      <div class="meta__value">Lead product designer + front-end</div>
+    </div>
+    <div class="meta__cell">
+      <div class="meta__label">Team</div>
+      <div class="meta__value">Growth design + engineering</div>
+    </div>
+    <div class="meta__cell">
+      <div class="meta__label">Scope</div>
+      <div class="meta__value">Validation → launch</div>
+    </div>
+    <div class="meta__cell">
+      <div class="meta__label">Impact</div>
+      <div class="meta__value">$44M over three years</div>
+    </div>
+  </div>
+
+  <div class="figure">
+    <img src="hero-plan-selector.png?v=1" alt="The shipped three-tier plan selector — Basic, Family, and All-Access — with Family marked as the recommended plan.">
+    <div class="figure__caption">The shipped three-tier plan selector, with Family recommended for most subscribers.</div>
+  </div>
+
+  <!-- OPPORTUNITY -->
+  <section class="sec">
+    <div class="sec__eyebrow">Opportunity</div>
+    <h2 class="sec__heading">One plan did not fit everyone.</h2>
+    <p class="sec__body">
+      NFHS Network sold one All Access subscription at one price, whether someone followed a single school or watched teams nationwide.
+    </p>
+    <p class="sec__body">
+      A pricing study suggested a tiered model could lift revenue 20–30%. My job was to turn that model into a purchase experience that remained easy to understand.
+    </p>
+    <div class="figure">
+      <img src="before-subscribe.png?v=1" alt="The legacy NFHS Network subscribe page offering a single All Access product billed monthly or annually.">
+      <div class="figure__caption">Before: a single All Access product, offered monthly or annually — no tiering by school, sport, or level of access.</div>
+    </div>
+  </section>
+
+  <!-- VALIDATION / PAINTED DOOR -->
+  <section class="sec">
+    <div class="sec__eyebrow">Validation</div>
+    <h2 class="sec__heading">The first test changed the direction.</h2>
+    <p class="sec__body">
+      We tested the proposed tiers with a painted-door experiment before building the full experience.
+    </p>
+    <p class="sec__body">
+      The model predicted a relatively even split. Instead, most people chose the cheapest tier and conversion declined. The middle plan needed to feel more valuable, and the differences between tiers needed to be clearer.
+    </p>
+    <div class="figure">
+      <img src="plan-mix-predicted-vs-actual.svg?v=5" alt="Bar chart comparing the L.E.K. predicted plan mix to the live painted-door test: 71% of buyers chose Basic versus a projected 36%.">
+
+      <div class="figure__caption">The gap between the predicted and actual plan mix reshaped the tiers, pricing, and default.</div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section class="sec">
+    <div class="sec__eyebrow">Architecture</div>
+    <h2 class="sec__heading">I designed the decision before the screen.</h2>
+    <p class="sec__body">
+      I mapped the full path from entry through payment, then structured the plans as a clear progression in access and value.
+    </p>
+    <p class="sec__body">
+      Family became the recommended starting point, annual billing was selected by default, and each choice carried clearly into checkout.
+    </p>
+    <p class="sec__body">
+      The relationship between Basic and Family was especially important. A modest price increase unlocked substantially more access, making the tradeoff easier to understand without hiding the cheaper option.
+    </p>
+    <div class="figure">
+      <img src="lek-post-checkout.png?v=3" alt="Post-checkout architecture flow across the Basic, Family, and All-Access tiers, mapping each plan's viewing path and the paywall and upgrade moments that branch from it.">
+      <div class="figure__caption">The end-to-end flow from plan comparison through confirmation.</div>
+    </div>
+  </section>
+
+  <!-- CRAFT -->
+  <section class="sec">
+    <div class="sec__eyebrow">Craft</div>
+    <h2 class="sec__heading">I carried the work into production.</h2>
+    <p class="sec__body">
+      I designed and built the plan selector across desktop and mobile, including its billing controls, selection states, and payment experience.
+    </p>
+    <p class="sec__body">
+      The final hierarchy made the recommended plan easy to recognize while keeping all three options straightforward to compare.
+    </p>
+    <div class="figure">
+      <img src="full-flow.png?v=1" alt="The full subscription flow for the Basic and Family tiers, with high-fidelity screens attached to each step from checkout through post-purchase paywall and upgrade moments.">
+      <div class="figure__caption">The full flow across the Basic and Family tiers, each step built out to a production-ready screen.</div>
+    </div>
+  </section>
+
+  <!-- RISK MITIGATION -->
+  <section class="sec">
+    <div class="sec__eyebrow">Risk mitigation</div>
+    <h2 class="sec__heading">I treated launch as a sequence, not a single bet.</h2>
+    <p class="sec__body">
+      Leadership wanted to know what happened if the first design underperformed. Instead of relying on one launch, I planned a series of experiments on the plan-selection surface.
+    </p>
+    <p class="sec__body">
+      We tested three layouts to see whether clearer hierarchy could move more subscribers toward higher tiers. The next iteration was already queued, so each result informed the one after it.
+    </p>
+    <div class="figure">
+      <img src="plan-selection-variants.png?v=1" alt="Three plan-selection layouts tested in sequence: the control card stack, a stacked variant, and a comparison-table variant.">
+      <div class="figure__caption">The three plan-selection layouts, tested in sequence so each result informed the next.</div>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <section class="sec">
+    <div class="sec__eyebrow">Impact</div>
+    <h2 class="sec__heading">Shipped to every new subscriber before football season.</h2>
+
+    <div class="hero-result">
+      <div class="hero-result__value">$44M</div>
+      <div class="hero-result__label">Incremental bookings over three years.</div>
+      <div class="hero-result__context">$8M in FY27 alone — roughly 80% of the pricing study’s projected ceiling.</div>
+    </div>
+
+    <p class="sec__body">
+      The experience launched to 100% of new subscribers by August 1. Revenue per user rose 30%, average order value 38–52%, and annual-plan adoption jumped to 2–4× baseline.
+    </p>
+
+
+    <div class="figure">
+      <img src="before-after.png?v=1" alt="Before and after: the legacy two-option subscribe page beside the launched three-tier plan selector.">
+      <div class="figure__caption">Before and after — the legacy subscribe page beside the launched tiered selector.</div>
+    </div>
+  </section>
+
+  <!-- END CTA -->
+  <section class="end-cta" id="contact">
+    <h2 class="end-cta__title">Want to ship like this on your team?</h2>
+    <div class="contact-actions">
+      <button type="button" class="pill pill--outline pill--lg contact-action" data-copy-email="conor@conormarley.com" aria-label="Copy email to clipboard">
+        <span class="contact-action__label">conor@conormarley.com</span>
+        <svg class="contact-action__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="5" y="5" width="9" height="9" rx="1.5"></rect>
+          <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"></path>
+        </svg>
+      </button>
+      <a class="pill pill--outline pill--lg contact-action" href="https://www.linkedin.com/in/conor-marley/" target="_blank" rel="noopener">
+        <span class="contact-action__label">LinkedIn</span>
+        <svg class="contact-action__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 3.5h6.5V10"></path>
+          <path d="M12.5 3.5L4 12"></path>
+        </svg>
+      </a>
+    </div>
+    <a class="end-cta__back" href="/#work">← More case studies</a>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__copy">© 2026 Conor Marley</div>
+  <div class="footer__links">
+    <a class="footer__link" href="#">LinkedIn</a>
+    <a class="footer__link" href="#">Twitter</a>
+    <a class="footer__link" href="mailto:hello@example.com">Email</a>
+  </div>
+</footer>
+
+<script>
+  (function setupEmailCopy() {
+    const lockWidths = () => document.querySelectorAll('[data-copy-email]').forEach(btn => {
+      btn.style.minWidth = Math.ceil(btn.getBoundingClientRect().width) + 'px';
+    });
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(lockWidths); } else { lockWidths(); }
+    document.querySelectorAll('[data-copy-email]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const email = btn.getAttribute('data-copy-email');
+        const labelEl = btn.querySelector('.contact-action__label') || btn;
+        try {
+          await navigator.clipboard.writeText(email);
+        } catch (_) {
+          const range = document.createRange();
+          range.selectNodeContents(labelEl);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          try { document.execCommand('copy'); } catch (__) {}
+          sel.removeAllRanges();
+        }
+        if (btn._copyTimer) return;
+        const original = labelEl.textContent;
+        labelEl.textContent = 'Copied!';
+        btn.classList.add('is-copied');
+        btn._copyTimer = setTimeout(() => {
+          labelEl.textContent = original;
+          btn.classList.remove('is-copied');
+          btn._copyTimer = null;
+        }, 1800);
+      });
+    });
+  })();
+</script>
+
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
+  <button class="lightbox__close" type="button" aria-label="Close image viewer">&times;</button>
+  <img class="lightbox__img" src="" alt="">
+</div>
+
+<script>
+  (function setupLightbox() {
+    var lb = document.getElementById('lightbox');
+    if (!lb) return;
+    var lbImg = lb.querySelector('.lightbox__img');
+    var closeBtn = lb.querySelector('.lightbox__close');
+    var lastFocus = null;
+
+    function open(img) {
+      lastFocus = document.activeElement;
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = img.alt || '';
+      lb.hidden = false;
+      // force reflow so the transition runs
+      void lb.offsetWidth;
+      lb.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+    function close() {
+      lb.classList.remove('is-open');
+      document.body.style.overflow = '';
+      var done = function () {
+        lb.hidden = true;
+        lbImg.src = '';
+        lb.removeEventListener('transitionend', done);
+      };
+      lb.addEventListener('transitionend', done);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    document.querySelectorAll('.figure img').forEach(function (img) {
+      if (/placeholder/i.test(img.getAttribute('src') || '')) return;
+      img.classList.add('is-zoomable');
+      img.addEventListener('click', function () { open(img); });
+    });
+
+    lb.addEventListener('click', function () { close(); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && lb.classList.contains('is-open')) close();
+    });
+  })();
+</script>
+</body>
+</html>
