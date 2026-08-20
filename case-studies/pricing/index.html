@@ -438,9 +438,38 @@
     .lightbox { padding: 16px; }
     .lightbox__close { top: 12px; right: 14px; }
   }
+
+  /* PAGE LOAD MOTION */
+  @keyframes page-load-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .page-load-motion {
+      opacity: 0;
+      animation: page-load-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      will-change: opacity, transform;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-load-motion {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .case-title { animation-delay: 0s; }
+    .case-dek { animation-delay: 0.25s; }
+    .meta { animation-delay: 0.5s; }
+  }
+
 </style>
 </head>
-<body>
+<body class="page-load-motion">
 
 <!-- NAV -->
 <nav class="nav">
@@ -459,12 +488,12 @@
 <main>
 
   <!-- HOOK -->
-  <h1 class="case-title">NFHS Pricing &amp; Packaging Redesign</h1>
-  <p class="case-dek">
+  <h1 class="case-title page-load-motion">NFHS Pricing &amp; Packaging Redesign</h1>
+  <p class="case-dek page-load-motion">
     I redesigned a one-size-fits-all subscription into a tiered system that contributed to $44M in incremental bookings. NFHS Network streams high school sports to more than a million subscribers. I led the new pricing experience from early validation through design, front-end implementation, and launch.
   </p>
 
-  <div class="meta">
+  <div class="meta page-load-motion">
     <div class="meta__cell">
       <div class="meta__label">Role</div>
       <div class="meta__value">Lead product designer + front-end</div>
