@@ -1398,9 +1398,42 @@
     .cta__title { font-size: 29px; }
     .footer__copy, .footer__link { font-size: 14px; }
   }
+
+  /* PAGE LOAD MOTION */
+  @keyframes page-load-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .page-load-motion {
+      opacity: 0;
+      animation: page-load-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      will-change: opacity, transform;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-load-motion {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__title { animation-delay: 0s; }
+    .stats__grid { animation-delay: 0.25s; }
+    .section-title#work { animation-delay: 0.5s; }
+    .case-studies > .cs-card { animation-delay: 0.75s; }
+    .cs-grid .cs-card:nth-child(1) { animation-delay: 1s; }
+    .cs-grid .cs-card:nth-child(2) { animation-delay: 1.25s; }
+    .cs-grid .cs-card:nth-child(3) { animation-delay: 1.5s; }
+  }
+
 </style>
 </head>
-<body>
+<body class="page-load-motion">
 
 <!-- NAV -->
 <nav class="nav">
@@ -1418,7 +1451,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <h1 class="hero__title">
+  <h1 class="hero__title page-load-motion">
     I'm Conor, a growth designer who ships.<br>
     <em>I sketch with Figma and ship the production code with Claude Code.</em>
   </h1>
@@ -1426,7 +1459,7 @@
 
 <!-- STATS -->
 <section class="stats">
-  <div class="stats__grid">
+  <div class="stats__grid page-load-motion">
     <div class="stat">
       <div class="stat__value">+$10M</div>
       <div class="stat__label">Incremental revenue</div>
@@ -1447,11 +1480,11 @@
 </section>
 
 <!-- SECTION HEADER -->
-<h2 class="section-title" id="work">Selected work</h2>
+<h2 class="section-title page-load-motion" id="work">Selected work</h2>
 
 <!-- CASE STUDIES -->
 <section class="case-studies">
-  <a class="cs-card cs-card--wide" href="/case-studies/pricing/">
+  <a class="cs-card cs-card--wide page-load-motion" href="/case-studies/pricing/">
     <div class="cs-wide__media">
       <img src="case-studies/pnp-desktop.png?v=1" alt="NFHS tiered pricing and packaging buyflow.">
     </div>
@@ -1462,7 +1495,7 @@
 
   <div class="cs-grid">
 
-    <a class="cs-card" href="/case-studies/refer-a-friend/">
+    <a class="cs-card page-load-motion" href="/case-studies/refer-a-friend/">
       <div class="cs-card__media cs-card__media--blank">
         <img class="cs-card__center" src="case-studies/refer-a-friend/raf-final.png?v=1" alt="The refer-a-friend banner with a one-tap Refer & Earn action.">
       </div>
@@ -1471,7 +1504,7 @@
       <span class="cs-card__cta">View case study <span class="arrow">&rarr;</span></span>
     </a>
 
-    <a class="cs-card" href="/case-studies/freedom-mortgage/">
+    <a class="cs-card page-load-motion" href="/case-studies/freedom-mortgage/">
       <div class="cs-card__media cs-card__media--blank">
         <img class="cs-card__peek" src="case-studies/freedom-mortgage/group-8.png?v=1" alt="The Halo intelligent assistant interface designed for Freedom Mortgage Loan Agents.">
       </div>
@@ -1480,7 +1513,7 @@
       <span class="cs-card__cta">View case study <span class="arrow">&rarr;</span></span>
     </a>
 
-    <a class="cs-card" href="/case-studies/accessibility/">
+    <a class="cs-card page-load-motion" href="/case-studies/accessibility/">
       <div class="cs-card__media cs-card__media--blank">
         <img class="cs-card__peek" src="case-studies/accessibility/even-better-alt.png?v=1" alt="The CourseNetworking Add Alt text dialog for describing an uploaded image.">
       </div>
