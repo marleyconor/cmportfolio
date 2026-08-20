@@ -477,9 +477,39 @@
     .hero__eyebrow, .sec__eyebrow, .role__role, .role__dates, .aside-list__tag { font-size: 13px; }
     .footer__copy, .footer__link { font-size: 14px; }
   }
+
+  /* PAGE LOAD MOTION */
+  @keyframes page-load-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .page-load-motion {
+      opacity: 0;
+      animation: page-load-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      will-change: opacity, transform;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-load-motion {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__photo, .hero__title { animation-delay: 0s; }
+    .hero__lede:nth-of-type(1) { animation-delay: 0.25s; }
+    .hero__lede:nth-of-type(2) { animation-delay: 0.5s; }
+    .hero__lede:nth-of-type(3) { animation-delay: 0.75s; }
+  }
+
 </style>
 </head>
-<body>
+<body class="page-load-motion">
 
 <nav class="nav">
   <div class="nav__inner">
@@ -497,18 +527,18 @@
 <main>
 
   <section class="hero">
-    <div class="hero__photo">
+    <div class="hero__photo page-load-motion">
       <img src="blackshirt.png" alt="Portrait of Conor Marley.">
     </div>
     <div class="hero__body">
-      <h1 class="hero__title">Hi, I'm Conor.</h1>
-      <p class="hero__lede">
+      <h1 class="hero__title page-load-motion">Hi, I'm Conor.</h1>
+      <p class="hero__lede page-load-motion">
         I'm an artist and product designer based in Indianapolis, Indiana. My work has spanned education, finance, AI, and sports, usually on products where design decisions have a measurable effect on how people use or pay for them.
       </p>
-      <p class="hero__lede">
+      <p class="hero__lede page-load-motion">
         Today I lead growth design at PlayOn Sports, working on subscriptions, onboarding, and streaming experiences for the NFHS Network. I tend to work end to end, from sketching and prototyping through production code, and increasingly use tools like Figma Make, Claude, and Claude Code to keep that loop tight.
       </p>
-      <p class="hero__lede">
+      <p class="hero__lede page-load-motion">
         Outside of work, I'm a photographer with a recent gallery opening, an IxDA speaker, a competitive Magic: The Gathering player, a wiki editor, rock climber, and at-home sushi chef.
       </p>
     </div>
