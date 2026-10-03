@@ -3,9 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/favicon.png?v=7">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=7">
 <title>Conor Marley · Growth Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Plus+Jakarta+Sans:ital,wght@1,700;1,800&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after {
@@ -15,7 +18,7 @@
   }
 
   :root {
-    --bg: #FCFAF7;
+    --bg: #f5f5f5;
     --bg-card: #F4F4F5;
     --bg-card-2: #ECECEE;
     --text: #292929;
@@ -63,7 +66,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(252, 250, 247, 0.85);
+    background: rgba(245, 245, 245, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
@@ -218,6 +221,7 @@
   }
 
   .hero__title em {
+    font-family: var(--font);
     font-style: normal;
     font-size: 14px;
     color: var(--text-secondary);
@@ -612,7 +616,7 @@
      ============================================ */
   .section-title {
     text-align: left;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 500;
     letter-spacing: -0.15px;
     line-height: 1.15;
@@ -981,13 +985,10 @@
     flex-direction: column;
     background: var(--bg);
     border-radius: 16px;
-    padding: 16px 16px 24px;
+    padding: 0;
     text-decoration: none;
     color: inherit;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.04), 0 1px 2px 2px rgba(0, 0, 0, 0.05);
-    transition: box-shadow 0.2s ease;
   }
-  .cs-card:hover { box-shadow: 0 0 2px rgba(0, 0, 0, 0.06), 0 1px 3px 2px rgba(0, 0, 0, 0.08); }
   .cs-card__media {
     aspect-ratio: 4 / 3;
     background: var(--bg-card);
@@ -1176,7 +1177,7 @@
   }
 
   .stat__value {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 500;
     letter-spacing: -0.15px;
     line-height: 1;
@@ -1257,7 +1258,12 @@
   .cta {
     max-width: 1120px;
     margin: 0 auto;
-    padding: 75px 32px 105px;
+    padding: 24px 32px 100px;
+  }
+  .cta__panel {
+    background: #EBEBEB;
+    border-radius: 24px;
+    padding: 104px 40px;
     text-align: center;
   }
 
@@ -1297,6 +1303,17 @@
   .contact-action.is-copied .contact-action__icon { display: none; }
   .cta__contact { margin-top: 28px; }
 
+  /* Buttons inside the CTA panel — darken on hover, no shadow/lift */
+  .cta__panel .contact-action {
+    background: #FFFFFF;
+    color: var(--text);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background-color 0.12s ease;
+  }
+  .cta__panel .contact-action:hover {
+    background: #EAEAEA;
+  }
+
   /* ============================================
      FOOTER
      ============================================ */
@@ -1315,20 +1332,11 @@
     color: var(--text-tertiary);
   }
 
-  .footer__links {
-    display: flex;
-    gap: 24px;
-  }
-
-  .footer__link {
-    font-size: 13px;
-    color: var(--text-secondary);
-    transition: color 0.15s ease;
-  }
-
-  .footer__link:hover {
-    color: var(--text);
-  }
+  /* LOGO PLACEMENT EXAMPLES */
+  .brand-mark { display: block; border-radius: 5px; }
+  .nav__logo .brand-mark { width: 20px; height: 20px; margin-right: 4px; }
+  .footer__copy { display: flex; align-items: center; gap: 10px; }
+  .footer__mark { width: 22px; height: 22px; border-radius: 5px; display: block; flex-shrink: 0; }
 
   /* ============================================
      RESPONSIVE
@@ -1353,7 +1361,7 @@
     .hero__ctas { display: none; }
     .stats { padding-top: 64px; padding-bottom: 64px; }
     .stat { aspect-ratio: auto; padding: 0; }
-    .stat__value { font-size: 24px; margin-bottom: 2px; }
+    .stat__value { font-size: 18px; margin-bottom: 2px; }
     .stat__label { font-size: 12px; line-height: 1.2; }
     .showcase { padding-bottom: 40px; }
     .showcase__card { padding: 24px 16px; min-height: 0; }
@@ -1373,6 +1381,7 @@
     .logo-card--sm { font-size: 13px; }
     .logo-card--serif { font-size: 16px; line-height: 1.1; gap: 4px; }
     .footer { padding: 24px 20px 40px; flex-direction: column; gap: 16px; }
+    .cta__panel { padding: 56px 22px; }
     .contact-actions { flex-direction: column; align-items: stretch; gap: 10px; }
     .contact-action { width: 100%; justify-content: center; }
   }
@@ -1383,13 +1392,13 @@
     .pill, .nav__ctas .pill { font-size: 14px; }
     .hero__title { font-size: 29px; max-width: none; }
     .hero__title em { font-size: 15px; }
-    .section-title { font-size: 29px; }
+    .section-title { font-size: 20px; }
     .feature__eyebrow { font-size: 13px; }
     .feature__heading { font-size: 29px; }
     .feature__desc { font-size: 15px; }
     .feature__link { font-size: 14px; }
     .cs-card__title, .cs-card__sub { font-size: 15px; }
-    .stat__value { font-size: 29px; }
+    .stat__value { font-size: 20px; }
     .stat__label { font-size: 13px; }
     .logos__label { font-size: 15px; }
     .quote-card__text { font-size: 15px; }
@@ -1398,39 +1407,14 @@
     .cta__title { font-size: 29px; }
     .footer__copy, .footer__link { font-size: 14px; }
   }
-
-  /* PAGE LOAD MOTION */
-  @keyframes page-load-in {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
+  /* Intro: one gentle content settle on load (book-opening, not slot-machine) */
+  @keyframes pageIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
   @media (prefers-reduced-motion: no-preference) {
-    .page-load-motion {
-      opacity: 0;
-      animation: page-load-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      will-change: opacity, transform;
-    }
+    .hero          { animation: pageIn 0.8s ease-out both; }
+    .stats         { animation: pageIn 0.8s ease-out 0.15s both; }
+    .section-title { animation: pageIn 0.8s ease-out 0.3s both; }
+    .case-studies  { animation: pageIn 0.8s ease-out 0.45s both; }
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    .page-load-motion {
-      animation: none;
-      opacity: 1;
-      transform: none;
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .hero__title { animation-delay: 0s; }
-    .stats__grid { animation-delay: 0.25s; }
-    .section-title#work { animation-delay: 0.5s; }
-    .case-studies > .cs-card { animation-delay: 0.75s; }
-    .cs-grid .cs-card:nth-child(1) { animation-delay: 1s; }
-    .cs-grid .cs-card:nth-child(2) { animation-delay: 1.25s; }
-    .cs-grid .cs-card:nth-child(3) { animation-delay: 1.5s; }
-  }
-
 </style>
 </head>
 <body>
@@ -1439,6 +1423,7 @@
 <nav class="nav">
   <div class="nav__inner">
     <a class="nav__logo" href="/" aria-label="Conor Marley">
+      <img src="/logo.png?v=7" alt="" class="brand-mark">
       <span class="nav__logo-text" aria-hidden="true">C<span class="lg-hide"><i class="lg-i">onor&nbsp;</i></span>M<span class="lg-hide"><i class="lg-i">arley</i></span></span>
     </a>
     <div class="nav__ctas">
@@ -1451,15 +1436,15 @@
 
 <!-- HERO -->
 <section class="hero">
-  <h1 class="hero__title page-load-motion">
+  <h1 class="hero__title">
     I'm Conor, a growth designer who ships.<br>
-    <em>I sketch with Figma and ship the production code with Claude Code.</em>
+    <em>I sketch in Figma and build measurable experiments with Claude Code.</em>
   </h1>
 </section>
 
 <!-- STATS -->
 <section class="stats">
-  <div class="stats__grid page-load-motion">
+  <div class="stats__grid">
     <div class="stat">
       <div class="stat__value">+$10M</div>
       <div class="stat__label">Incremental revenue</div>
@@ -1480,13 +1465,13 @@
 </section>
 
 <!-- SECTION HEADER -->
-<h2 class="section-title page-load-motion" id="work">Selected work</h2>
+<h2 class="section-title" id="work">Selected work</h2>
 
 <!-- CASE STUDIES -->
 <section class="case-studies">
-  <a class="cs-card cs-card--wide page-load-motion" href="/case-studies/pricing/">
+  <a class="cs-card cs-card--wide" href="/case-studies/pricing/">
     <div class="cs-wide__media">
-      <img src="case-studies/pnp-desktop.png?v=1" alt="NFHS tiered pricing and packaging buyflow.">
+      <img src="case-studies/pricing/pnp-tiers-glass.png?v=2" alt="NFHS tiered pricing and packaging buyflow.">
     </div>
     <h3 class="cs-card__title">NFHS Pricing &amp; Packaging Redesign</h3>
     <p class="cs-card__sub">Rebuilt the subscription journey around a tiered pricing model, driving $9M in first-year bookings.</p>
@@ -1495,27 +1480,27 @@
 
   <div class="cs-grid">
 
-    <a class="cs-card page-load-motion" href="/case-studies/refer-a-friend/">
-      <div class="cs-card__media cs-card__media--blank">
-        <img class="cs-card__center" src="case-studies/refer-a-friend/raf-final.png?v=1" alt="The refer-a-friend banner with a one-tap Refer & Earn action.">
+    <a class="cs-card" href="/case-studies/refer-a-friend/">
+      <div class="cs-card__media">
+        <img src="case-studies/refer-a-friend/raf-hero.png?v=1" alt="The refer-a-friend banner with a one-tap Refer & Earn action.">
       </div>
       <h3 class="cs-card__title">Shipping Refer-a-Friend</h3>
       <p class="cs-card__sub">Redesigned and built the referral experience, doubling referral revenue in a quarter.</p>
       <span class="cs-card__cta">View case study <span class="arrow">&rarr;</span></span>
     </a>
 
-    <a class="cs-card page-load-motion" href="/case-studies/freedom-mortgage/">
-      <div class="cs-card__media cs-card__media--blank">
-        <img class="cs-card__peek" src="case-studies/freedom-mortgage/group-8.png?v=1" alt="The Halo intelligent assistant interface designed for Freedom Mortgage Loan Agents.">
+    <a class="cs-card" href="/case-studies/freedom-mortgage/">
+      <div class="cs-card__media">
+        <img src="case-studies/freedom-mortgage/fm-hero.png?v=2" alt="The Halo intelligent assistant interface designed for Freedom Mortgage Loan Agents.">
       </div>
       <h3 class="cs-card__title">AI assistant for Freedom Mortgage</h3>
       <p class="cs-card__sub">Led research and design for an AI assistant that saved agents 2.3 hrs a week.</p>
       <span class="cs-card__cta">View case study <span class="arrow">&rarr;</span></span>
     </a>
 
-    <a class="cs-card page-load-motion" href="/case-studies/accessibility/">
-      <div class="cs-card__media cs-card__media--blank">
-        <img class="cs-card__peek" src="case-studies/accessibility/even-better-alt.png?v=1" alt="The CourseNetworking Add Alt text dialog for describing an uploaded image.">
+    <a class="cs-card" href="/case-studies/accessibility/">
+      <div class="cs-card__media">
+        <img src="case-studies/accessibility/a11y-hero.png?v=2" alt="The universal accessibility symbol representing the WCAG 2.0 accessibility work.">
       </div>
       <h3 class="cs-card__title">WCAG 2.0 accessibility overhaul</h3>
       <p class="cs-card__sub">Led the audit and rollout, then published a VPAT that unlocked new contracts.</p>
@@ -1527,6 +1512,7 @@
 
 <!-- CTA -->
 <section class="cta" id="contact">
+  <div class="cta__panel">
   <h2 class="cta__title">Ready to ship something measurable?</h2>
   <div class="contact-actions cta__contact">
     <button type="button" class="pill pill--outline pill--lg contact-action" data-copy-email="conor@conormarley.com" aria-label="Copy email to clipboard">
@@ -1544,15 +1530,12 @@
       </svg>
     </a>
   </div>
+  </div>
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="footer__copy">© 2026 Conor Marley</div>
-  <div class="footer__links">
-    <a class="footer__link" href="https://www.linkedin.com/in/conor-marley/" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="footer__link" href="mailto:conor@conormarley.com">Email</a>
-  </div>
+  <div class="footer__copy"><img src="/logo.png?v=7" alt="" class="footer__mark">© 2026 Conor Marley</div>
 </footer>
 
 <script>

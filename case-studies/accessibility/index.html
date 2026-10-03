@@ -3,14 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/favicon.png?v=7">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=7">
 <title>Accessibility in an education product · Conor Marley</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --bg: #FCFAF7;
+    --bg: #f5f5f5;
     --bg-card: #F4F4F5;
     --bg-card-2: #ECECEE;
     --text: #292929;
@@ -50,7 +53,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(252, 250, 247, 0.85);
+    background: rgba(245, 245, 245, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
@@ -86,6 +89,25 @@
   }
   .nav__link:hover { color: var(--text); }
 
+  .nav__logo-text { display: inline-flex; align-items: baseline; }
+  .nav__logo .lg-hide {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 6em;
+    vertical-align: bottom;
+    padding-bottom: 0.25em;
+    margin-bottom: -0.25em;
+    transition: max-width 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav__logo .lg-i {
+    display: inline-block;
+    font-style: normal;
+    transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.1s linear;
+  }
+  .nav.is-compact .nav__logo .lg-hide { max-width: 0; }
+  .nav.is-compact .nav__logo .lg-i { transform: translateX(-100%); opacity: 0; }
+
   .pill {
     display: inline-flex;
     align-items: center;
@@ -114,9 +136,9 @@
 
   /* SHELL */
   main {
-    max-width: 1024px;
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 64px 32px 80px;
+    padding: 80px 32px 80px;
   }
 
   /* HERO */
@@ -129,10 +151,11 @@
     margin-bottom: 20px;
   }
   .case-title {
+    font-family: var(--font);
     font-size: 24px;
     font-weight: 500;
     letter-spacing: -0.15px;
-    line-height: 1.08;
+    line-height: 1.3;
     max-width: 880px;
     margin-bottom: 22px;
   }
@@ -289,20 +312,26 @@
     .hero-result { padding: 36px 24px; }
   }
 
-  /* CTA */
-  .end-cta {
-    text-align: center;
-    padding: 160px 0 64px;
-    border-top: 1px solid var(--border);
+  /* CTA — gray panel, matches home */
+  .cta {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 24px 32px 100px;
   }
-  .end-cta__title {
+  .cta__panel {
+    background: #EBEBEB;
+    border-radius: 24px;
+    padding: 104px 40px;
+    text-align: center;
+  }
+  .cta__title {
     font-size: 24px;
     font-weight: 500;
     letter-spacing: -0.15px;
     line-height: 1.2;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
   }
-  .end-cta__row {
+  .cta__ctas {
     display: flex;
     gap: 12px;
     justify-content: center;
@@ -314,7 +343,6 @@
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
-    margin-bottom: 28px;
   }
   .contact-action { gap: 10px; justify-content: center; }
   .contact-action__icon {
@@ -326,35 +354,30 @@
   }
   .contact-action:hover .contact-action__icon { opacity: 1; }
   .contact-action.is-copied .contact-action__icon { display: none; }
+  .cta__contact { margin-top: 28px; }
 
-  .end-cta__back {
-    display: inline-block;
-    margin-top: 100px;
-    font-size: 15px;
-    color: var(--text-secondary);
-    border-bottom: 1px solid var(--border-strong);
-    padding-bottom: 1px;
-    transition: color 0.15s ease, border-color 0.15s ease;
-  }
-  .end-cta__back:hover {
+  /* Buttons inside the CTA panel — darken on hover, no shadow/lift */
+  .cta__panel .contact-action {
+    background: #FFFFFF;
     color: var(--text);
-    border-bottom-color: var(--text);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background-color 0.12s ease;
+  }
+  .cta__panel .contact-action:hover {
+    background: #EAEAEA;
   }
 
   /* FOOTER */
   .footer {
-    max-width: 1024px;
+    max-width: 1120px;
     margin: 0 auto;
     padding: 64px 32px 80px;
+    border-top: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   .footer__copy { font-size: 13px; color: var(--text-tertiary); }
-  .footer__links { display: flex; gap: 24px; }
-  .footer__link { font-size: 13px; color: var(--text-secondary); transition: color 0.15s ease; }
-  .footer__link:hover { color: var(--text); }
-
   @media (max-width: 768px) {
     .nav__inner { grid-template-columns: 1fr auto; padding: 14px 20px; }
     .nav__logo { font-size: 16px; }
@@ -368,9 +391,8 @@
     .results { grid-template-columns: 1fr; }
     .pullquote { padding: 24px 22px; }
     .pullquote__text { font-size: 14px; }
-    .end-cta { padding: 100px 0 40px; }
-    .end-cta__back { margin-top: 60px; }
-    .end-cta__row { flex-direction: column; align-items: stretch; }
+    .cta { padding-left: 20px; padding-right: 20px; }
+    .cta__panel { padding: 56px 22px; }
     .contact-actions { flex-direction: column; align-items: stretch; gap: 10px; }
     .contact-action { width: 100%; justify-content: center; }
     .footer { padding: 24px 20px 40px; flex-direction: column; gap: 16px; }
@@ -378,7 +400,7 @@
   @media (min-width: 1024px) {
     body { font-size: 15px; }
     .nav__logo { font-size: 17px; }
-    .case-title, .sec__heading, .end-cta__title, .pullquote__text, .hero-result__value { font-size: 29px; }
+    .case-title, .sec__heading, .cta__title, .pullquote__text, .hero-result__value { font-size: 29px; }
     .case-dek, .sec__body, .hero-result__label, .meta__value { font-size: 15px; }
     .case-eyebrow, .sec__eyebrow, .meta__label { font-size: 13px; }
     .footer__copy, .footer__link { font-size: 14px; }
@@ -439,35 +461,19 @@
     .lightbox { padding: 16px; }
     .lightbox__close { top: 12px; right: 14px; }
   }
-
-  /* PAGE LOAD MOTION */
-  @keyframes page-load-in {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
+  /* Intro: one gentle content settle on load (book-opening, not slot-machine) */
+  @keyframes pageIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
   @media (prefers-reduced-motion: no-preference) {
-    .page-load-motion {
-      opacity: 0;
-      animation: page-load-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      will-change: opacity, transform;
-    }
+    .case-title { animation: pageIn 0.8s ease-out both; }
+    .case-dek   { animation: pageIn 0.8s ease-out 0.15s both; }
+    .meta       { animation: pageIn 0.8s ease-out 0.3s both; }
+    .case-body  { animation: pageIn 0.8s ease-out 0.45s both; }
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    .page-load-motion {
-      animation: none;
-      opacity: 1;
-      transform: none;
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .case-title { animation-delay: 0s; }
-    .case-dek { animation-delay: 0.25s; }
-    .meta { animation-delay: 0.5s; }
-  }
-
+  /* LOGO */
+  .brand-mark { display: block; border-radius: 5px; }
+  .nav__logo .brand-mark { width: 20px; height: 20px; margin-right: 4px; }
+  .footer__copy { display: flex; align-items: center; gap: 10px; }
+  .footer__mark { width: 22px; height: 22px; border-radius: 5px; display: block; flex-shrink: 0; }
 </style>
 </head>
 <body>
@@ -475,8 +481,9 @@
 <!-- NAV -->
 <nav class="nav">
   <div class="nav__inner">
-    <a class="nav__logo" href="/">
-      <span>Conor Marley</span>
+    <a class="nav__logo" href="/" aria-label="Conor Marley">
+      <img src="/logo.png?v=7" alt="" class="brand-mark">
+      <span class="nav__logo-text" aria-hidden="true">C<span class="lg-hide"><i class="lg-i">onor&nbsp;</i></span>M<span class="lg-hide"><i class="lg-i">arley</i></span></span>
     </a>
     <div class="nav__ctas">
       <a class="nav__link" href="/#work">Work</a>
@@ -489,12 +496,12 @@
 <main>
 
   <!-- HERO -->
-  <h1 class="case-title page-load-motion">Making an education platform fully accessible.</h1>
-  <p class="case-dek page-load-motion">
+  <h1 class="case-title">Making an education platform fully accessible.</h1>
+  <p class="case-dek">
     Accessibility isn't a feature you bolt on at the end; it's the baseline for whether a product is usable at all. I led the work to bring CourseNetworking, an education platform used by students across a wide range of abilities, into conformance with WCAG 2.0, then published it so clients could trust it.
   </p>
 
-  <div class="meta page-load-motion">
+  <div class="meta">
     <div class="meta__cell">
       <div class="meta__label">Role</div>
       <div class="meta__value">Lead Product Designer</div>
@@ -513,6 +520,7 @@
     </div>
   </div>
 
+  <div class="case-body">
   <!-- CONTEXT -->
   <section class="sec">
     <div class="sec__eyebrow">Context</div>
@@ -624,10 +632,11 @@
     </p>
   </section>
 
-  <!-- END CTA -->
-  <section class="end-cta" id="contact">
-    <h2 class="end-cta__title">Want to ship like this on your team?</h2>
-    <div class="contact-actions">
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <div class="cta__panel">
+    <h2 class="cta__title">Ready to ship something measurable?</h2>
+    <div class="contact-actions cta__contact">
       <button type="button" class="pill pill--outline pill--lg contact-action" data-copy-email="conor@conormarley.com" aria-label="Copy email to clipboard">
         <span class="contact-action__label">conor@conormarley.com</span>
         <svg class="contact-action__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -643,20 +652,31 @@
         </svg>
       </a>
     </div>
-    <a class="end-cta__back" href="/#work">← More case studies</a>
+    </div>
   </section>
+  </div>
 
 </main>
 
 <footer class="footer">
-  <div class="footer__copy">© 2026 Conor Marley</div>
-  <div class="footer__links">
-    <a class="footer__link" href="https://www.linkedin.com/in/conor-marley/" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="footer__link" href="mailto:conor@conormarley.com">Email</a>
-  </div>
+  <div class="footer__copy"><img src="/logo.png?v=7" alt="" class="footer__mark">© 2026 Conor Marley</div>
 </footer>
 
 <script>
+  (function setupLogoCollapse() {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    let ticking = false;
+    const apply = () => {
+      nav.classList.toggle('is-compact', window.scrollY > 24);
+      ticking = false;
+    };
+    apply();
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+    }, { passive: true });
+  })();
+
   (function setupEmailCopy() {
     const lockWidths = () => document.querySelectorAll('[data-copy-email]').forEach(btn => {
       btn.style.minWidth = Math.ceil(btn.getBoundingClientRect().width) + 'px';

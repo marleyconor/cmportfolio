@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/favicon.png?v=7">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=7">
 <title>About · Conor Marley</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,7 +12,7 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --bg: #FCFAF7;
+    --bg: #f5f5f5;
     --bg-card: #F4F4F5;
     --bg-card-2: #ECECEE;
     --text: #292929;
@@ -48,7 +50,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(252, 250, 247, 0.85);
+    background: rgba(245, 245, 245, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
@@ -84,6 +86,25 @@
   }
   .nav__link:hover { color: var(--text); }
 
+  .nav__logo-text { display: inline-flex; align-items: baseline; }
+  .nav__logo .lg-hide {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 6em;
+    vertical-align: bottom;
+    padding-bottom: 0.25em;
+    margin-bottom: -0.25em;
+    transition: max-width 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav__logo .lg-i {
+    display: inline-block;
+    font-style: normal;
+    transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.1s linear;
+  }
+  .nav.is-compact .nav__logo .lg-hide { max-width: 0; }
+  .nav.is-compact .nav__logo .lg-i { transform: translateX(-100%); opacity: 0; }
+
   .pill {
     display: inline-flex;
     align-items: center;
@@ -114,7 +135,7 @@
   main {
     max-width: 1120px;
     margin: 0 auto;
-    padding: 64px 32px 80px;
+    padding: 80px 32px 80px;
   }
 
   /* HERO SPLIT */
@@ -400,20 +421,30 @@
     .aside-list li { grid-template-columns: 1fr; gap: 4px; padding: 12px 14px; }
   }
 
-  /* END CTA */
-  .end-cta {
-    text-align: center;
-    padding: 72px 0 96px;
-    border-top: 1px solid var(--border);
+  /* CTA — gray panel, matches home */
+  .cta {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 24px 32px 100px;
   }
-  .end-cta__title {
+  .cta__panel {
+    background: #EBEBEB;
+    border-radius: 24px;
+    padding: 104px 40px;
+    text-align: center;
+  }
+  .cta__title {
     font-size: 24px;
     font-weight: 500;
     letter-spacing: -0.15px;
     line-height: 1.2;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
   }
-  .end-cta__row { display: flex; gap: 12px; justify-content: center; }
+  .cta__ctas {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
 
   .contact-actions {
     display: flex;
@@ -421,7 +452,6 @@
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
-    margin-bottom: 28px;
   }
   .contact-action { gap: 10px; justify-content: center; }
   .contact-action__icon {
@@ -433,21 +463,30 @@
   }
   .contact-action:hover .contact-action__icon { opacity: 1; }
   .contact-action.is-copied .contact-action__icon { display: none; }
+  .cta__contact { margin-top: 28px; }
+
+  /* Buttons inside the CTA panel — darken on hover, no shadow/lift */
+  .cta__panel .contact-action {
+    background: #FFFFFF;
+    color: var(--text);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background-color 0.12s ease;
+  }
+  .cta__panel .contact-action:hover {
+    background: #EAEAEA;
+  }
 
   /* FOOTER */
   .footer {
     max-width: 1120px;
     margin: 0 auto;
     padding: 64px 32px 80px;
+    border-top: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   .footer__copy { font-size: 13px; color: var(--text-tertiary); }
-  .footer__links { display: flex; gap: 24px; }
-  .footer__link { font-size: 13px; color: var(--text-secondary); }
-  .footer__link:hover { color: var(--text); }
-
   @media (max-width: 900px) {
     .hero { grid-template-columns: 1fr; gap: 32px; margin-bottom: 64px; }
     .hero__photo { max-width: 380px; aspect-ratio: 4/5; }
@@ -463,8 +502,8 @@
     .sec { margin-bottom: 48px; }
     .hero__lede { font-size: 14px; }
     .hero__ctas { flex-direction: column; align-items: stretch; }
-    .end-cta { padding: 56px 0 64px; }
-    .end-cta__row { flex-direction: column; align-items: stretch; }
+    .cta { padding-left: 20px; padding-right: 20px; }
+    .cta__panel { padding: 56px 22px; }
     .contact-actions { flex-direction: column; align-items: stretch; gap: 10px; }
     .contact-action { width: 100%; justify-content: center; }
     .footer { padding: 24px 20px 40px; flex-direction: column; gap: 16px; }
@@ -472,49 +511,34 @@
   @media (min-width: 1024px) {
     body { font-size: 15px; }
     .nav__logo { font-size: 17px; }
-    .hero__title, .sec__heading, .end-cta__title { font-size: 29px; }
+    .hero__title, .sec__heading, .cta__title { font-size: 29px; }
     .hero__lede, .sec__body, .role__body, .aside-list li { font-size: 15px; }
     .hero__eyebrow, .sec__eyebrow, .role__role, .role__dates, .aside-list__tag { font-size: 13px; }
     .footer__copy, .footer__link { font-size: 14px; }
   }
-
-  /* PAGE LOAD MOTION */
-  @keyframes page-load-in {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
+  /* Intro: one gentle content settle on load (book-opening, not slot-machine) */
+  @keyframes pageIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
   @media (prefers-reduced-motion: no-preference) {
-    .page-load-motion {
-      opacity: 0;
-      animation: page-load-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      will-change: opacity, transform;
-    }
+    .hero__photo { animation: pageIn 0.8s ease-out both; }
+    .hero__title { animation: pageIn 0.8s ease-out both; }
+    .hero__lede:nth-of-type(1){ animation: pageIn 0.8s ease-out 0.25s both; }
+    .hero__lede:nth-of-type(2){ animation: pageIn 0.8s ease-out 0.5s both; }
+    .hero__lede:nth-of-type(3){ animation: pageIn 0.8s ease-out 0.75s both; }
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    .page-load-motion {
-      animation: none;
-      opacity: 1;
-      transform: none;
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .hero__photo, .hero__title { animation-delay: 0s; }
-    .hero__lede:nth-of-type(1) { animation-delay: 0.25s; }
-    .hero__lede:nth-of-type(2) { animation-delay: 0.5s; }
-    .hero__lede:nth-of-type(3) { animation-delay: 0.75s; }
-  }
-
+  /* LOGO */
+  .brand-mark { display: block; border-radius: 5px; }
+  .nav__logo .brand-mark { width: 20px; height: 20px; margin-right: 4px; }
+  .footer__copy { display: flex; align-items: center; gap: 10px; }
+  .footer__mark { width: 22px; height: 22px; border-radius: 5px; display: block; flex-shrink: 0; }
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <div class="nav__inner">
-    <a class="nav__logo" href="/">
-      <span>Conor Marley</span>
+    <a class="nav__logo" href="/" aria-label="Conor Marley">
+      <img src="/logo.png?v=7" alt="" class="brand-mark">
+      <span class="nav__logo-text" aria-hidden="true">C<span class="lg-hide"><i class="lg-i">onor&nbsp;</i></span>M<span class="lg-hide"><i class="lg-i">arley</i></span></span>
     </a>
     <div class="nav__ctas">
       <a class="nav__link" href="/#work">Work</a>
@@ -527,26 +551,27 @@
 <main>
 
   <section class="hero">
-    <div class="hero__photo page-load-motion">
+    <div class="hero__photo">
       <img src="blackshirt.png" alt="Portrait of Conor Marley.">
     </div>
     <div class="hero__body">
-      <h1 class="hero__title page-load-motion">Hi, I'm Conor.</h1>
-      <p class="hero__lede page-load-motion">
+      <h1 class="hero__title">Hi, I'm Conor.</h1>
+      <p class="hero__lede">
         I'm an artist and product designer based in Indianapolis, Indiana. My work has spanned education, finance, AI, and sports, usually on products where design decisions have a measurable effect on how people use or pay for them.
       </p>
-      <p class="hero__lede page-load-motion">
+      <p class="hero__lede">
         Today I lead growth design at PlayOn Sports, working on subscriptions, onboarding, and streaming experiences for the NFHS Network. I tend to work end to end, from sketching and prototyping through production code, and increasingly use tools like Figma Make, Claude, and Claude Code to keep that loop tight.
       </p>
-      <p class="hero__lede page-load-motion">
+      <p class="hero__lede">
         Outside of work, I'm a photographer with a recent gallery opening, an IxDA speaker, a competitive Magic: The Gathering player, a wiki editor, rock climber, and at-home sushi chef.
       </p>
     </div>
   </section>
 
-  <section class="end-cta" id="contact">
-    <h2 class="end-cta__title">Want to ship something measurable together?</h2>
-    <div class="contact-actions">
+  <section class="cta" id="contact">
+    <div class="cta__panel">
+    <h2 class="cta__title">Ready to ship something measurable?</h2>
+    <div class="contact-actions cta__contact">
       <button type="button" class="pill pill--outline pill--lg contact-action" data-copy-email="conor@conormarley.com" aria-label="Copy email to clipboard">
         <span class="contact-action__label">conor@conormarley.com</span>
         <svg class="contact-action__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -554,7 +579,7 @@
           <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"></path>
         </svg>
       </button>
-      <a class="pill pill--outline pill--lg contact-action" href="https://www.linkedin.com/in/conormarley/" target="_blank" rel="noopener">
+      <a class="pill pill--outline pill--lg contact-action" href="https://www.linkedin.com/in/conor-marley/" target="_blank" rel="noopener">
         <span class="contact-action__label">LinkedIn</span>
         <svg class="contact-action__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M6 3.5h6.5V10"></path>
@@ -562,16 +587,13 @@
         </svg>
       </a>
     </div>
+    </div>
   </section>
 
 </main>
 
 <footer class="footer">
-  <div class="footer__copy">© 2026 Conor Marley</div>
-  <div class="footer__links">
-    <a class="footer__link" href="https://www.linkedin.com/in/conor-marley/" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="footer__link" href="mailto:conor@conormarley.com">Email</a>
-  </div>
+  <div class="footer__copy"><img src="/logo.png?v=7" alt="" class="footer__mark">© 2026 Conor Marley</div>
 </footer>
 
 <script>
@@ -589,6 +611,20 @@
       btn.classList.remove('is-visible');
     });
   });
+
+  (function setupLogoCollapse() {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    let ticking = false;
+    const apply = () => {
+      nav.classList.toggle('is-compact', window.scrollY > 24);
+      ticking = false;
+    };
+    apply();
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+    }, { passive: true });
+  })();
 
   (function setupEmailCopy() {
     const lockWidths = () => document.querySelectorAll('[data-copy-email]').forEach(btn => {

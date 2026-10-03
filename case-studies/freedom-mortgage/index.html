@@ -3,14 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/favicon.png?v=7">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=7">
 <title>Freedom Mortgage · Conor Marley</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --bg: #FCFAF7;
+    --bg: #f5f5f5;
     --bg-card: #F4F4F5;
     --bg-card-2: #ECECEE;
     --text: #292929;
@@ -50,7 +53,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(252, 250, 247, 0.85);
+    background: rgba(245, 245, 245, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
@@ -86,6 +89,25 @@
   }
   .nav__link:hover { color: var(--text); }
 
+  .nav__logo-text { display: inline-flex; align-items: baseline; }
+  .nav__logo .lg-hide {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 6em;
+    vertical-align: bottom;
+    padding-bottom: 0.25em;
+    margin-bottom: -0.25em;
+    transition: max-width 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav__logo .lg-i {
+    display: inline-block;
+    font-style: normal;
+    transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.1s linear;
+  }
+  .nav.is-compact .nav__logo .lg-hide { max-width: 0; }
+  .nav.is-compact .nav__logo .lg-i { transform: translateX(-100%); opacity: 0; }
+
   .pill {
     display: inline-flex;
     align-items: center;
@@ -114,9 +136,9 @@
 
   /* SHELL */
   main {
-    max-width: 1024px;
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 64px 32px 80px;
+    padding: 80px 32px 80px;
   }
 
   /* HERO */
@@ -129,10 +151,11 @@
     margin-bottom: 20px;
   }
   .case-title {
+    font-family: var(--font);
     font-size: 24px;
     font-weight: 500;
     letter-spacing: -0.15px;
-    line-height: 1.08;
+    line-height: 1.3;
     max-width: 880px;
     margin-bottom: 22px;
   }
@@ -251,7 +274,7 @@
     letter-spacing: -0.15px;
   }
 
-  /* RESULTS — hero result anchor */
+  /* RESULTS: hero result anchor */
   .hero-result {
     background: transparent;
     border: 1px solid var(--stroke);
@@ -288,20 +311,26 @@
     .hero-result { padding: 36px 24px; }
   }
 
-  /* CTA */
-  .end-cta {
-    text-align: center;
-    padding: 160px 0 64px;
-    border-top: 1px solid var(--border);
+  /* CTA: gray panel, matches home */
+  .cta {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 24px 32px 100px;
   }
-  .end-cta__title {
+  .cta__panel {
+    background: #EBEBEB;
+    border-radius: 24px;
+    padding: 104px 40px;
+    text-align: center;
+  }
+  .cta__title {
     font-size: 24px;
     font-weight: 500;
     letter-spacing: -0.15px;
     line-height: 1.2;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
   }
-  .end-cta__row {
+  .cta__ctas {
     display: flex;
     gap: 12px;
     justify-content: center;
@@ -313,7 +342,6 @@
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
-    margin-bottom: 28px;
   }
   .contact-action { gap: 10px; justify-content: center; }
   .contact-action__icon {
@@ -325,35 +353,30 @@
   }
   .contact-action:hover .contact-action__icon { opacity: 1; }
   .contact-action.is-copied .contact-action__icon { display: none; }
+  .cta__contact { margin-top: 28px; }
 
-  .end-cta__back {
-    display: inline-block;
-    margin-top: 100px;
-    font-size: 15px;
-    color: var(--text-secondary);
-    border-bottom: 1px solid var(--border-strong);
-    padding-bottom: 1px;
-    transition: color 0.15s ease, border-color 0.15s ease;
-  }
-  .end-cta__back:hover {
+  /* Buttons inside the CTA panel darken on hover with no shadow or lift */
+  .cta__panel .contact-action {
+    background: #FFFFFF;
     color: var(--text);
-    border-bottom-color: var(--text);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background-color 0.12s ease;
+  }
+  .cta__panel .contact-action:hover {
+    background: #EAEAEA;
   }
 
   /* FOOTER */
   .footer {
-    max-width: 1024px;
+    max-width: 1120px;
     margin: 0 auto;
     padding: 64px 32px 80px;
+    border-top: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   .footer__copy { font-size: 13px; color: var(--text-tertiary); }
-  .footer__links { display: flex; gap: 24px; }
-  .footer__link { font-size: 13px; color: var(--text-secondary); transition: color 0.15s ease; }
-  .footer__link:hover { color: var(--text); }
-
   @media (max-width: 768px) {
     .nav__inner { grid-template-columns: 1fr auto; padding: 14px 20px; }
     .nav__logo { font-size: 16px; }
@@ -367,9 +390,8 @@
     .results { grid-template-columns: 1fr; }
     .pullquote { padding: 24px 22px; }
     .pullquote__text { font-size: 14px; }
-    .end-cta { padding: 100px 0 40px; }
-    .end-cta__back { margin-top: 60px; }
-    .end-cta__row { flex-direction: column; align-items: stretch; }
+    .cta { padding-left: 20px; padding-right: 20px; }
+    .cta__panel { padding: 56px 22px; }
     .contact-actions { flex-direction: column; align-items: stretch; gap: 10px; }
     .contact-action { width: 100%; justify-content: center; }
     .footer { padding: 24px 20px 40px; flex-direction: column; gap: 16px; }
@@ -377,7 +399,7 @@
   @media (min-width: 1024px) {
     body { font-size: 15px; }
     .nav__logo { font-size: 17px; }
-    .case-title, .sec__heading, .end-cta__title, .pullquote__text, .hero-result__value { font-size: 29px; }
+    .case-title, .sec__heading, .cta__title, .pullquote__text, .hero-result__value { font-size: 29px; }
     .case-dek, .sec__body, .hero-result__label, .meta__value { font-size: 15px; }
     .case-eyebrow, .sec__eyebrow, .meta__label { font-size: 13px; }
     .footer__copy, .footer__link { font-size: 14px; }
@@ -438,35 +460,19 @@
     .lightbox { padding: 16px; }
     .lightbox__close { top: 12px; right: 14px; }
   }
-
-  /* PAGE LOAD MOTION */
-  @keyframes page-load-in {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
+  /* Intro: one gentle content settle on load (book-opening, not slot-machine) */
+  @keyframes pageIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
   @media (prefers-reduced-motion: no-preference) {
-    .page-load-motion {
-      opacity: 0;
-      animation: page-load-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      will-change: opacity, transform;
-    }
+    .case-title { animation: pageIn 0.8s ease-out both; }
+    .case-dek   { animation: pageIn 0.8s ease-out 0.15s both; }
+    .meta       { animation: pageIn 0.8s ease-out 0.3s both; }
+    .case-body  { animation: pageIn 0.8s ease-out 0.45s both; }
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    .page-load-motion {
-      animation: none;
-      opacity: 1;
-      transform: none;
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .case-title { animation-delay: 0s; }
-    .case-dek { animation-delay: 0.25s; }
-    .meta { animation-delay: 0.5s; }
-  }
-
+  /* LOGO */
+  .brand-mark { display: block; border-radius: 5px; }
+  .nav__logo .brand-mark { width: 20px; height: 20px; margin-right: 4px; }
+  .footer__copy { display: flex; align-items: center; gap: 10px; }
+  .footer__mark { width: 22px; height: 22px; border-radius: 5px; display: block; flex-shrink: 0; }
 </style>
 </head>
 <body>
@@ -474,8 +480,9 @@
 <!-- NAV -->
 <nav class="nav">
   <div class="nav__inner">
-    <a class="nav__logo" href="/">
-      <span>Conor Marley</span>
+    <a class="nav__logo" href="/" aria-label="Conor Marley">
+      <img src="/logo.png?v=7" alt="" class="brand-mark">
+      <span class="nav__logo-text" aria-hidden="true">C<span class="lg-hide"><i class="lg-i">onor&nbsp;</i></span>M<span class="lg-hide"><i class="lg-i">arley</i></span></span>
     </a>
     <div class="nav__ctas">
       <a class="nav__link" href="/#work">Work</a>
@@ -488,12 +495,12 @@
 <main>
 
   <!-- HOOK -->
-  <h1 class="case-title page-load-motion">Designing an intelligent assistant for Freedom Mortgage.</h1>
-  <p class="case-dek page-load-motion">
-    How can generative AI transform compliance-heavy financial workflows? I led research and design for an AI assistant that cut the time loan agents spend on documentation-heavy questions by 82% — and saved every agent 2.3 hours a week.
+  <h1 class="case-title">Designing an AI assistant for Freedom Mortgage.</h1>
+  <p class="case-dek">
+    Freedom Mortgage loan agents lost time searching documentation and escalating routine questions. I led research and design for an AI assistant that reduced time spent on documentation-heavy questions by 82% and saved each agent 2.3 hours a week.
   </p>
 
-  <div class="meta page-load-motion">
+  <div class="meta">
     <div class="meta__cell">
       <div class="meta__label">Role</div>
       <div class="meta__value">UX researcher + designer</div>
@@ -512,87 +519,100 @@
     </div>
   </div>
 
+  <div class="case-body">
   <div class="figure">
     <img src="final-prototype.webp?v=1" alt="The final approved Halo assistant prototype: splash, chat intro, thinking state, response, and error screens, marked ready for dev.">
-    <div class="figure__caption">The intelligent assistant — an NLP-first helper built into the loan agent’s daily workflow.</div>
+    <div class="figure__caption">The final Halo assistant, built around natural-language questions in the agent workflow.</div>
   </div>
 
   <!-- OVERVIEW -->
   <section class="sec">
     <div class="sec__eyebrow">Overview</div>
-    <h2 class="sec__heading">Hours lost to repetitive questions.</h2>
+    <h2 class="sec__heading">Routine questions were slowing down the floor.</h2>
     <p class="sec__body">
-      Freedom Mortgage loan agents spent hours answering repetitive questions and digging through documentation — slowing customer service and frustrating agents and borrowers alike. The goal was an AI-powered assistant that could automate FAQs, cut paperwork, and free agents for higher-value work. My role was to lead user research, then translate the findings into prototypes and final designs.
+      Loan agents spent hours answering repeat questions, searching documentation, and moving between disconnected systems. When a workflow broke, they often had to stop and ask a manager for help.
+    </p>
+    <p class="sec__body">
+      The goal was to give agents one place to find reliable answers without adding another tool to manage. I led the user research, then turned what we learned into prototypes and final designs.
     </p>
   </section>
 
   <!-- RESEARCH -->
   <section class="sec">
     <div class="sec__eyebrow">Research</div>
-    <h2 class="sec__heading">Shadowing agents on the call-center floor.</h2>
+    <h2 class="sec__heading">I started on the call-center floor.</h2>
     <p class="sec__body">
-      We ran field research at a call center, shadowing loan agents through their daily workflow. Two core personas emerged — the Loan Advisor, focused on answering borrower questions quickly and accurately, and the Manager, focused on performance, efficiency, and compliance. Three findings shaped everything that followed:
+      We shadowed loan agents through their daily work and watched where the process slowed down. Three patterns kept appearing.
     </p>
     <p class="sec__body">
-      <strong>Workflow breakdowns cause escalations.</strong> Agents follow rigid click-paths and stop entirely when the flow breaks — even minor errors escalate to managers, causing delays.
+      <strong>Broken workflows caused escalations.</strong> Agents followed rigid paths and stopped when something unexpected happened. Even small errors could require a manager.
     </p>
     <p class="sec__body">
-      <strong>Tool fragmentation wastes time.</strong> Four-plus disconnected systems force agents to toggle between tools instead of serving borrowers.
+      <strong>Disconnected tools wasted time.</strong> Agents moved across more than four systems while trying to answer a single borrower question.
     </p>
     <p class="sec__body">
-      <strong>High cognitive load and compliance risk.</strong> Poor system feedback and compliance gaps raise agent stress, reduce borrower trust, and expose the business to risk.
+      <strong>Unclear feedback increased risk.</strong> Agents had to remember complex rules without enough guidance from the product, which raised stress and created room for compliance mistakes.
     </p>
   </section>
 
   <!-- PERSONAS -->
   <section class="sec">
     <div class="sec__eyebrow">Personas</div>
-    <h2 class="sec__heading">Jordan and Rachel.</h2>
+    <h2 class="sec__heading">The assistant had to prevent breakdowns, not create another one.</h2>
     <p class="sec__body">
-      From the research I built two personas. Jordan, the Loan Advisor, follows rigid workflows and escalates the moment the process breaks. Rachel, the Manager, is overwhelmed by repeat issues and constant troubleshooting. Both told us the same thing: the assistant had to reduce breakdowns, not add one more tool to toggle between.
+      I turned the research into two personas. Jordan, a Loan Advisor, needed fast answers without leaving the task at hand. Rachel, a Manager, needed fewer repeat questions and more confidence that agents were following the right process.
+    </p>
+    <p class="sec__body">
+      Both pointed to the same design requirement: the assistant had to fit the existing workflow and help agents recover when it broke.
     </p>
     <div class="figure">
       <img src="persona-1.webp?v=1" alt="Persona cards for Rachel Sinclair, a Loan Advisor Manager, and Jordan Carter, a first-year Loan Advisor.">
-      <div class="figure__caption">Jordan and Rachel — the two people every design decision had to serve.</div>
+      <div class="figure__caption">Jordan and Rachel represented the agents asking questions and the managers handling escalations.</div>
     </div>
   </section>
 
   <!-- COMPETITIVE -->
   <section class="sec">
     <div class="sec__eyebrow">Competitive research</div>
-    <h2 class="sec__heading">What the FinTech leaders got right.</h2>
+    <h2 class="sec__heading">I studied how mature assistants handled the details.</h2>
     <p class="sec__body">
-      We analyzed Chase, Rocket Mortgage, and Intercom — studying their AI solutions for interaction models, animation, and tone of voice, and used ChatGPT to synthesize patterns across them. That gave us concrete recommendations for button placement, chatbot copy, and interaction style that shaped the first prototype.
+      We compared assistants from Chase, Rocket Mortgage, and Intercom, looking closely at interaction patterns, motion, and tone of voice. I used ChatGPT to help organize the patterns, then translated them into recommendations for button placement, chatbot copy, and response behavior.
     </p>
     <div class="figure">
-      <img src="persona-2.webp?v=1" alt="Competitive teardown of AI chat motion and animation patterns — open, close, bot-typing, message-entry, and hover states.">
-      <div class="figure__caption">Interaction models and tone, pulled from the FinTech leaders and synthesized into a first direction.</div>
+      <img src="persona-2.webp?v=1" alt="Competitive teardown of AI chat motion and animation patterns, including open, close, bot-typing, message-entry, and hover states.">
+      <div class="figure__caption">The patterns that shaped the first interaction model and tone.</div>
     </div>
   </section>
 
   <!-- DESIGN -->
   <section class="sec">
     <div class="sec__eyebrow">Design</div>
-    <h2 class="sec__heading">Sketch first, then a system-locked prototype.</h2>
+    <h2 class="sec__heading">I kept the first ideas cheap to change.</h2>
     <p class="sec__body">
-      I started with low-fidelity sketches to explore ideas fast and align the team — testing multiple layouts in minutes, iterating cheaply, and avoiding costly mistakes in code. As I remind teams, it’s orders of magnitude cheaper to fix a sketch than to fix code. Using our design system and the competitive recommendations, I built the first interactive Figma prototype for early user testing and stakeholder walkthroughs.
+      I sketched several layouts before moving into Figma. That let the team compare directions quickly while the structure was still easy to change.
+    </p>
+    <p class="sec__body">
+      I built the strongest direction with the existing design system, then turned it into an interactive prototype for user testing and stakeholder walkthroughs.
     </p>
     <div class="figure">
-      <img src="sketches.webp?v=1" alt="Hand-drawn wireframe sketches exploring the executive dashboard layout — trends, chat, and graph arrangements.">
-      <div class="figure__caption">From paper to a system-locked prototype — cheap to change while the direction was still forming.</div>
+      <img src="sketches.webp?v=1" alt="Hand-drawn wireframe sketches exploring the executive dashboard layout, including trends, chat, and graph arrangements.">
+      <div class="figure__caption">Early sketches kept the layout flexible before the direction moved into the design system.</div>
     </div>
   </section>
 
   <!-- TESTING -->
   <section class="sec">
     <div class="sec__eyebrow">Testing</div>
-    <h2 class="sec__heading">Users wanted to type, not tap.</h2>
+    <h2 class="sec__heading">People wanted to type, not tap.</h2>
     <p class="sec__body">
-      The first round of testing surfaced a clear signal: users disliked buttons in chat and overwhelmingly preferred natural-language input. For both usability and MVP scope, we pivoted to an NLP-only assistant — simpler to build, and aligned with what people already expect from AI. The final prototype folded in feedback from testing, marketing, and branding, and I worked with developers on a markup style guide so the build matched design intent.
+      The first test produced a clear signal. People disliked choosing from buttons inside the chat and preferred asking questions in their own words.
+    </p>
+    <p class="sec__body">
+      We removed the buttons and focused the MVP on natural-language input. I folded feedback from users, marketing, and brand into the final prototype, then worked with developers on a markup guide so the build matched the design.
     </p>
     <div class="figure">
       <img src="ui-design.webp?v=1" alt="The Halo chat interface across four states, showing knowledge-base result buttons and typed natural-language queries.">
-      <div class="figure__caption">The pivot — buttons out, natural language in. The version that went to pilot.</div>
+      <div class="figure__caption">The tested direction replaced response buttons with natural-language input.</div>
     </div>
   </section>
 
@@ -604,23 +624,24 @@
     <div class="hero-result">
       <div class="hero-result__value">82%</div>
       <div class="hero-result__label">Reduction in time spent on documentation-heavy questions.</div>
-      <div class="hero-result__context">Plus 2.3 hours saved per agent every week — time returned to higher-value borrower work.</div>
+      <div class="hero-result__context">Each agent also saved 2.3 hours a week for higher-value borrower work.</div>
     </div>
 
     <p class="sec__body">
-      Reducing workflow breakdowns cut unnecessary escalations, integrating tools saved agents hours each week, and clearer feedback loops lowered compliance risk — faster, more accurate loan processing that built borrower trust.
+      The assistant gave agents a faster path to reliable answers inside their workflow. That meant less time searching documentation and more time helping borrowers.
     </p>
 
     <div class="figure">
       <img src="final-prototype.webp?v=1" alt="The final approved Halo assistant, demo-ready and marked ready for development.">
-      <div class="figure__caption">The assistant in the agent workflow — demo-ready and prepared for pilot rollout.</div>
+      <div class="figure__caption">The final assistant, prepared for development and pilot rollout.</div>
     </div>
   </section>
 
-  <!-- END CTA -->
-  <section class="end-cta" id="contact">
-    <h2 class="end-cta__title">Want to ship like this on your team?</h2>
-    <div class="contact-actions">
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <div class="cta__panel">
+    <h2 class="cta__title">Ready to ship something measurable?</h2>
+    <div class="contact-actions cta__contact">
       <button type="button" class="pill pill--outline pill--lg contact-action" data-copy-email="conor@conormarley.com" aria-label="Copy email to clipboard">
         <span class="contact-action__label">conor@conormarley.com</span>
         <svg class="contact-action__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -636,20 +657,31 @@
         </svg>
       </a>
     </div>
-    <a class="end-cta__back" href="/#work">← More case studies</a>
+    </div>
   </section>
+  </div>
 
 </main>
 
 <footer class="footer">
-  <div class="footer__copy">© 2026 Conor Marley</div>
-  <div class="footer__links">
-    <a class="footer__link" href="https://www.linkedin.com/in/conor-marley/" target="_blank" rel="noopener">LinkedIn</a>
-    <a class="footer__link" href="mailto:conor@conormarley.com">Email</a>
-  </div>
+  <div class="footer__copy"><img src="/logo.png?v=7" alt="" class="footer__mark">© 2026 Conor Marley</div>
 </footer>
 
 <script>
+  (function setupLogoCollapse() {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    let ticking = false;
+    const apply = () => {
+      nav.classList.toggle('is-compact', window.scrollY > 24);
+      ticking = false;
+    };
+    apply();
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+    }, { passive: true });
+  })();
+
   (function setupEmailCopy() {
     const lockWidths = () => document.querySelectorAll('[data-copy-email]').forEach(btn => {
       btn.style.minWidth = Math.ceil(btn.getBoundingClientRect().width) + 'px';
